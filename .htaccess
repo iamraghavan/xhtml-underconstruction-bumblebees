@@ -1,0 +1,17 @@
+# Disable directory listing
+Options -Indexes
+
+# Protect the .htaccess file itself
+<Files .htaccess>
+Order Allow,Deny
+Deny from all
+</Files>
+
+# Protect against directory traversal attacks
+Options -MultiViews
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redirect all requests to the index.html page
+RewriteRule ^ index.html [L]
